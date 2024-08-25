@@ -1,0 +1,7 @@
+# prod.cnf
+[client]
+host = database-appcps.cxrjcnbakf8k.us-east-1.rds.amazonaws.com
+database = dbscraping
+user = adminAppCPS
+password = 4dm1nFtg4slCPS
+default-character-set = utf8
