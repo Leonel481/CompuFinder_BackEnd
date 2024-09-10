@@ -35,7 +35,7 @@ class Product(models.Model):
     datetime_scraper = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.name} | {self.category} | {self.brand} | {self.entity}'
+        return f'{self.name} | {self.category} | {self.brand} | {self.company}'
     
 
 class Stock(models.Model):
