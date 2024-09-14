@@ -3,6 +3,7 @@ import json
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.pagination import LimitOffsetPagination
+from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import status 
 from .serializers import *
@@ -21,6 +22,7 @@ from .models import *
 #                         }, status=status.HTTP_200_OK
 #                         )
 
+
 class ProductAPI(ListAPIView):
     queryset = Product.objects.all()
     serializer_class = List_of_product_Serializer
@@ -28,3 +30,9 @@ class ProductAPI(ListAPIView):
 
     def get(self, request):
         return self.list(request)
+    
+    def retrieve(self, request, pk=None):
+        queryset = Product.objects.filter(code=pk)
+        product = get_object_or_404(queryset)
+        serializer = self.serializer_class(product)
+        return Response(serializer.data)
