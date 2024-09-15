@@ -6,13 +6,15 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.pagination import LimitOffsetPagination
 # from django.shortcuts import get_object_or_404
 # from rest_framework.response import Response
-# from rest_framework import status 
 from .serializers import SerializerProduct, SerializerPrices
 from .models import Product, Price
 from .filters import ProductFilter, ProductNameFilter
 
 
 class ProductListView(ListAPIView):
+    """
+    Filtrar la lista de productos segun los headers que se ingresen
+    """
     queryset = Product.objects.all()
     serializer_class = SerializerProduct
     pagination_class = LimitOffsetPagination
@@ -20,6 +22,9 @@ class ProductListView(ListAPIView):
     filterset_class = ProductFilter
     
 class ProductNameListView(ListAPIView):
+    """
+    Api para consulta parciales, busca texto contenido en la columna
+    """
     queryset = Product.objects.all()
     serializer_class = SerializerProduct
     pagination_class = LimitOffsetPagination
@@ -27,6 +32,9 @@ class ProductNameListView(ListAPIView):
     filterset_class = ProductNameFilter
 
 class PriceListView(ListAPIView):
+    """
+    Api para consulta de los precios historicos de un producto unico (precio, dscuento)
+    """
     serializer_class = SerializerPrices
     pagination_class = LimitOffsetPagination
     def get_queryset(self):
@@ -39,6 +47,9 @@ class PriceListView(ListAPIView):
         return queryset
 
 class ProductDetailView(RetrieveAPIView):
+    """
+    Api para consulta de datos actuales asociado a un solo producto (no historico).
+    """
     queryset = Product.objects.all()
     serializer_class = SerializerProduct
     lookup_field = 'code'
