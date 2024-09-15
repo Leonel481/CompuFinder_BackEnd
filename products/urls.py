@@ -9,7 +9,21 @@ urlpatterns = [
 ]
 
 
-# /api/products/?company=name&category=name&brand=name&offset=0&limit=10
+
+
+#Consulta de productos en lista
+# /api/products/?offset=0&limit=10
+
+#Consulta de productos en lista
 # /api/products/code/
+
+
+#Consulta de productos con texto contenido en el nombre del producto
 # /api/products/search/?name=texto
-# /api/prices/?code=code, /api/prices/?code=code&offset=0&limit=5
+
+#Consulta de productos en lista con filtros adicionales
+# /api/products/?company=name&category=name&brand=name&offset=0&limit=10
+
+# Consulta de precios historicos
+# /api/prices/?code=code (sin paginacion)
+# /api/prices/?code=code&offset=0&limit=5 (con paginacion)
