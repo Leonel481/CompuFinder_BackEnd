@@ -1,38 +1,44 @@
-from django.shortcuts import render
-import json
-from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView
+# from django.shortcuts import render
+# import json
+from rest_framework.exceptions import NotFound
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.pagination import LimitOffsetPagination
-from django.shortcuts import get_object_or_404
-from rest_framework.response import Response
-from rest_framework import status 
-from .serializers import *
-from .models import *
-
-# class ProductAPI(APIView):
-#     # serializer_class = List_of_product_Serializer
-
-#     def get(self, request):
-#         productos = Product.objects.all()
-#         serializer = List_of_product_Serializer(productos, many = True)
-        
-#         return Response({
-#                         'status': 'success',
-#                         'data': serializer.data
-#                         }, status=status.HTTP_200_OK
-#                         )
+# from django.shortcuts import get_object_or_404
+# from rest_framework.response import Response
+# from rest_framework import status 
+from .serializers import SerializerProduct, SerializerPrices
+from .models import Product, Price
+from .filters import ProductFilter, ProductNameFilter
 
 
-class ProductAPI(ListAPIView):
+class ProductListView(ListAPIView):
     queryset = Product.objects.all()
-    serializer_class = List_of_product_Serializer
+    serializer_class = SerializerProduct
     pagination_class = LimitOffsetPagination
-
-    def get(self, request):
-        return self.list(request)
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = ProductFilter
     
-    def retrieve(self, request, pk=None):
-        queryset = Product.objects.filter(code=pk)
-        product = get_object_or_404(queryset)
-        serializer = self.serializer_class(product)
-        return Response(serializer.data)
+class ProductNameListView(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = SerializerProduct
+    pagination_class = LimitOffsetPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = ProductNameFilter
+
+class PriceListView(ListAPIView):
+    serializer_class = SerializerPrices
+    pagination_class = LimitOffsetPagination
+    def get_queryset(self):
+        code = self.request.query_params.get('code', None)
+        if not code:
+            raise NotFound(detail="The 'code' parameter is required.")
+        queryset = Price.objects.filter(code=code)
+        if not queryset.exists():
+            raise NotFound(detail="No prices found for the provided 'code'.")
+        return queryset
+
+class ProductDetailView(RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = SerializerProduct
+    lookup_field = 'code'

@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import *
+from .models import Product, Price
 
-class List_of_product_Serializer(serializers.ModelSerializer):
+class SerializerProduct(serializers.ModelSerializer):
     code = serializers.CharField(max_length=20)
     company = serializers.CharField(max_length=100)
     brand = serializers.CharField(max_length=100)
@@ -18,3 +18,12 @@ class List_of_product_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ('__all__')
+
+class SerializerPrices(serializers.ModelSerializer):
+    price_usd = serializers.FloatField()
+    price_pen = serializers.FloatField()
+    discount = serializers.FloatField()
+
+    class Meta:
+        model = Price
+        fields = ['price_usd', 'price_pen', 'discount', 'datetime_scraper']
