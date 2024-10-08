@@ -1,9 +1,9 @@
 from .base import *
 import os
 
-os.environ['PGSERVICEFILE'] = '/pg_service.conf'
+# os.environ['PGSERVICEFILE'] = '/pg_service.conf'
 # SECURITY WARNING: In local, set True for debugging
-DEBUG = True
+# DEBUG = True
 
 
 DATABASES = {
