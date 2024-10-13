@@ -9,12 +9,15 @@ from rest_framework.pagination import LimitOffsetPagination
 from .serializers import SerializerProduct, SerializerPrices
 from .models import Product, Price
 from .filters import ProductFilter, ProductNameFilter
-
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
 class ProductListView(ListAPIView):
     """
     Filtrar la lista de productos segun los headers que se ingresen
     """
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Product.objects.all()
     serializer_class = SerializerProduct
     pagination_class = LimitOffsetPagination
@@ -25,6 +28,8 @@ class ProductNameListView(ListAPIView):
     """
     Api para consulta parciales, busca texto contenido en la columna
     """
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Product.objects.all()
     serializer_class = SerializerProduct
     pagination_class = LimitOffsetPagination
@@ -35,6 +40,8 @@ class PriceListView(ListAPIView):
     """
     Api para consulta de los precios historicos de un producto unico (precio, dscuento)
     """
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     serializer_class = SerializerPrices
     pagination_class = LimitOffsetPagination
     def get_queryset(self):
@@ -50,6 +57,9 @@ class ProductDetailView(RetrieveAPIView):
     """
     Api para consulta de datos actuales asociado a un solo producto (no historico).
     """
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Product.objects.all()
     serializer_class = SerializerProduct
     lookup_field = 'code'
+    
