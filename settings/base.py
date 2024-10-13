@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-%yncaeub(xj4ujf@tb)wseuoyrq9%l#8p7-7bjd2rf+fh$i)0#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost','108.59.83.251']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','www.compu-finder.com','compu-finder.com','108.59.83.251']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'rest_framework',
     'django_filters',
     'products',
