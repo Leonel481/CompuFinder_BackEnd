@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-%yncaeub(xj4ujf@tb)wseuoyrq9%l#8p7-7bjd2rf+fh$i)0#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost','www.compu-finder.com','compu-finder.com','108.59.83.251']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','www.compu-finder.com','compu-finder.com']
 
 
 # Application definition
@@ -54,7 +54,7 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
@@ -139,7 +139,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = '/var/www/html/static/'
 
 
 # Default primary key field type

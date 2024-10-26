@@ -10,9 +10,9 @@ DATABASES = {
    "default": {
        "ENGINE": "django.db.backends.postgresql",
        "NAME": "db_compu_finder_dev",
-       "USER": "useradmin",
-       "PASSWORD": "\,l+%jK1Qe'q1?D2",
-       "HOST": "35.193.232.106",
+       "USER": "compu_finder",
+       "PASSWORD": "T@]6=jkX9V]p,D2J",
+       "HOST": "10.128.0.2",
        "PORT": "5432",
    }
 }
