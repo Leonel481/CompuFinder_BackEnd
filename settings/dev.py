@@ -1,28 +1,31 @@
 from .base import *
-import os
+from myproject.env import BASE_DIR, env
 
-# os.environ['PGSERVICEFILE'] = '/pg_service.conf'
-# SECURITY WARNING: In local, set True for debugging
-# DEBUG = True
+env.read_env(os.path.join(BASE_DIR,'.env'))
 
+DEBUG = env.bool('DJANGO_DEBUG', default=True)
+
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
 DATABASES = {
    "default": {
        "ENGINE": "django.db.backends.postgresql",
-       "NAME": "db_compu_finder_dev",
-       "USER": "compu_finder",
-       "PASSWORD": "T@]6=jkX9V]p,D2J",
-       "HOST": "10.128.0.2",
-       "PORT": "5432",
+       "NAME": env('DB_NAME'),
+       "USER": env('DB_USER'),
+       "PASSWORD": env('DB_PASSWORD'),
+       "HOST": env('HOST'),
+       "PORT": env('PORT'),
    }
 }
 
 # DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "OPTIONS": {
-#             "service": 'my_service',
-#             'passfile': '.my_pgpass',
-#         },
-#     }
+#    "default": {
+#        "ENGINE": "django.db.backends.postgresql",
+#        "NAME": "db_compu_finder_dev",
+#        "USER": "compu_finder",
+#        "PASSWORD": "T@]6=jkX9V]p,D2J",
+#        "HOST": "35.226.28.41",
+#        "PORT": "5432",
+#    }
 # }
+

@@ -1,0 +1,7 @@
+FROM nginx
+
+# Copia el script al contenedor
+COPY start-nginx.sh /usr/local/bin/start-nginx.sh
+
+# Establece permisos de ejecución
+RUN chmod +x /usr/local/bin/start-nginx.sh

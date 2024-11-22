@@ -1,0 +1,63 @@
+# version: '3.9'
+
+services:
+
+  django_app:
+    build: .
+    volumes:
+      - staticfiles:/Back_End_app/staticfiles
+    environment:
+      DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE}
+      DJANGO_DEBUG: ${DJANGO_DEBUG}
+      SECRET_KEY: ${SECRET_KEY}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      HOST: ${HOST}
+      PORT: ${PORT}
+    ports:
+      - "8000:8000"
+    entrypoint: ['/usr/local/bin/start-django.sh']
+
+  nginx:
+    build: 
+      context: .
+      dockerfile: Dockerfile.nginx
+    environment:
+      SERVER_NAME: ${SERVER_NAME}
+    ports: 
+      - 80:80 # Puerto http 
+      - 443:443 # Puerto https
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      # - ./start-nginx.sh:/usr/local/bin/start-nginx.sh
+      - staticfiles:/var/www/html/static
+      # - static:/var/www/html/static
+      - ./config/certbot/certs:/etc/letsencrypt
+    entrypoint: ['/usr/local/bin/start-nginx.sh']
+    depends_on:
+      - django_app
+
+  cerbot:
+    build: 
+      context: .
+      dockerfile: Dockerfile.certbot
+    volumes:
+      - ./config/certbot/certs:/etc/letsencrypt # Montar el volumen para los certificados
+      - ./config/certbot/www:/var/www/certbot # Montar el volumen para la verfificacion de certificados
+      - ./config/nginx/conf.d:/etc/nginx/conf.d # Montar la configuración de Nginx
+    environment:
+      DOMAIN: ${DOMAIN}
+      EMAIL: ${EMAIL}
+      USER_UID: ${USER_UID}
+      USER_GID: ${USER_GID}
+    entrypoint: ['/usr/local/bin/start-certbot.sh']
+    depends_on:
+      - django_app
+    user: "${USER_UID}:${USER_GID}"
+
+volumes:
+  certs:
+  staticfiles:
+
