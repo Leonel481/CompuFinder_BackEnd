@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # # Reemplaza las variables de entorno en el archivo de plantilla y genera el archivo de configuración
 # envsubst < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
@@ -16,7 +16,10 @@ source .env
 set +a
 
 # Eliminar barras invertidas del archivo de configuración y guardar en un nuevo archivo
-sed 's/\\//g' /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf
+sed 's/\\//g' /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/conf.d/nginx.conf
 
 # Reemplazar solo la variable SERVER_NAME en el nuevo archivo
-sed -i "s/\${SERVER_NAME}/${SERVER_NAME}/" /etc/nginx/conf.d/default.conf
+sed -i "s/\${SERVER_NAME}/${SERVER_NAME}/" /etc/nginx/conf.d/nginx.conf
+
+# Iniciar Nginx
+nginx -g 'daemon off;'

@@ -14,4 +14,5 @@ COPY start-django.sh /usr/local/bin/start-django.sh
 # Establece permisos de ejecución
 RUN chmod +x /usr/local/bin/start-django.sh
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
+# RUN pip install --no-cache-dir -r requirements.txt

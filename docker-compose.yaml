@@ -5,7 +5,7 @@ services:
   django_app:
     build: .
     volumes:
-      - staticfiles:/Back_End_app/staticfiles
+      - staticfiles:/var/www/html/static
     environment:
       DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE}
       DJANGO_DEBUG: ${DJANGO_DEBUG}
@@ -35,27 +35,27 @@ services:
       - staticfiles:/var/www/html/static
       # - static:/var/www/html/static
       - ./config/certbot/certs:/etc/letsencrypt
-    entrypoint: ['/usr/local/bin/start-nginx.sh']
+    entrypoint: ['/bin/bash','/usr/local/bin/start-nginx.sh']
     depends_on:
       - django_app
 
-  cerbot:
-    build: 
-      context: .
-      dockerfile: Dockerfile.certbot
-    volumes:
-      - ./config/certbot/certs:/etc/letsencrypt # Montar el volumen para los certificados
-      - ./config/certbot/www:/var/www/certbot # Montar el volumen para la verfificacion de certificados
-      - ./config/nginx/conf.d:/etc/nginx/conf.d # Montar la configuración de Nginx
-    environment:
-      DOMAIN: ${DOMAIN}
-      EMAIL: ${EMAIL}
-      USER_UID: ${USER_UID}
-      USER_GID: ${USER_GID}
-    entrypoint: ['/usr/local/bin/start-certbot.sh']
-    depends_on:
-      - django_app
-    user: "${USER_UID}:${USER_GID}"
+  # cerbot:
+  #   build: 
+  #     context: .
+  #     dockerfile: Dockerfile.certbot
+  #   volumes:
+  #     - ./config/certbot/certs:/etc/letsencrypt # Montar el volumen para los certificados
+  #     - ./config/certbot/www:/var/www/certbot # Montar el volumen para la verfificacion de certificados
+  #     - ./config/nginx/conf.d:/etc/nginx/conf.d # Montar la configuración de Nginx
+  #   environment:
+  #     DOMAIN: ${DOMAIN}
+  #     EMAIL: ${EMAIL}
+  #     USER_UID: ${USER_UID}
+  #     USER_GID: ${USER_GID}
+  #   entrypoint: ['/usr/local/bin/start-certbot.sh']
+  #   depends_on:
+  #     - django_app
+  #   user: "${USER_UID}:${USER_GID}"
 
 volumes:
   certs:
