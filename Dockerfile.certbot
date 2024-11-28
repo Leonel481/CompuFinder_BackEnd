@@ -1,0 +1,9 @@
+FROM certbot/certbot
+
+RUN mkdir -p /var/www/certbot
+
+# Copia el script al contenedor
+COPY start-certbot.sh /usr/local/bin/start-certbot.sh
+
+# Establece permisos de ejecución
+RUN chmod +x /usr/local/bin/start-certbot.sh

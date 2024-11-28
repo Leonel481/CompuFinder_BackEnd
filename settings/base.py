@@ -13,21 +13,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+from myproject.env import BASE_DIR, env
+
+env.read_env(os.path.join(BASE_DIR,'.env'))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-%yncaeub(xj4ujf@tb)wseuoyrq9%l#8p7-7bjd2rf+fh$i)0#'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost','www.compu-finder.com','compu-finder.com']
-
+SECRET_KEY =  env('SECRET_KEY')
 
 # Application definition
 
@@ -138,9 +129,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = '/var/www/html/static/'
-
+STATIC_URL = '/static/'
+# STATIC_ROOT = '/staticfiles/'
+STATIC_ROOT = '/var/www/html/static/' #para despliegue sin docker
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
