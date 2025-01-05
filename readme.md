@@ -1,34 +1,23 @@
 # Endpoints
 
-## Endpoints para crear un nuevo usuario:
+## Endpoints de autenticacion y token:
 
--  https://www.compu-finder.com/api/v1/auth/user/register/
+- Crear usuario: https://www.compu-finder.com/api/v1/auth/user/register/
 
-## Endpoints para generar token del usuario:
+- generar token: https://www.compu-finder.com/api/v1/auth/token/
 
-- https://www.compu-finder.com/api/v1/auth/token/
-
-## Endpoints para volver a generar:
-
-- https://www.compu-finder.com/api/v1/auth/token/refresh/
+- Refrescar el token, cuando este expira: https://www.compu-finder.com/api/v1/auth/token/refresh/
 
 
-## Endpoint para consultar productos en lista:
+## Endpoint para consultar productos:
 
-- https://www.compu-finder.com/api/v1/products/products-list/?offset=0&limit=10
+- Consultar productos en lista: https://www.compu-finder.com/api/v1/products/products-list/?offset=0&limit=10
 
+- Consultar producto unico: https://www.compu-finder.com/api/v1/products/code/
 
-## Endpoint para consultar producto unico:
+- Consultar producto con texto contenido en el nombre del producto: https://www.compu-finder.com/api/v1/products/search/?name=texto
 
-- https://www.compu-finder.com/api/v1/products/code/
-
-## Endpoint para consultar producto con texto contenido en el nombre del producto:
-
-- https://www.compu-finder.com/api/v1/products/search/?name=texto
-
-## Consulta de productos en lista con filtros adicionales
-
-- https://www.compu-finder.com/api/v1/products/products-list/?company=name&category=name&brand=name&offset=0&limit=10
+- Consultar productos en lista con filtros adicionales: https://www.compu-finder.com/api/v1/products/products-list/?company=name&category=name&brand=name&offset=0&limit=10
 
 # Codigo para el post y get de los endpoints:
 
@@ -41,7 +30,7 @@
 data = {
     "username": username,
     "password": password,
-    "email": email  # Solo incluir si es obligatorio
+    "email": email  # Opcional
 }
 
 json_data = json.dumps(data)

@@ -15,6 +15,11 @@ set -a
 source .env
 set +a
 
+# Eliminar el archivo de configuración existente si existe
+if [ -f /etc/nginx/conf.d/nginx.conf ]; then
+    rm /etc/nginx/conf.d/nginx.conf
+fi
+
 # Eliminar barras invertidas del archivo de configuración y guardar en un nuevo archivo
 sed 's/\\//g' /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/conf.d/nginx.conf
 
