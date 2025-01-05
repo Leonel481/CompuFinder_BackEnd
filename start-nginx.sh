@@ -20,6 +20,7 @@ sed 's/\\//g' /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/conf.d/nginx.co
 
 # Reemplazar solo la variable SERVER_NAME en el nuevo archivo
 sed -i "s/\${SERVER_NAME}/${SERVER_NAME}/" /etc/nginx/conf.d/nginx.conf
+sed -i "s/\${DOMAIN}/${DOMAIN}/" /etc/nginx/conf.d/nginx.conf
 
 # Iniciar Nginx
 nginx -g 'daemon off;'
