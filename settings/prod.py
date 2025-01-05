@@ -3,7 +3,7 @@ from myproject.env import BASE_DIR, env
 
 env.read_env(os.path.join(BASE_DIR,'.env'))
 
-DEBUG = env.bool('DJANGO_DEBUG', default=True)
+DEBUG = env.bool('DJANGO_DEBUG', default=False)
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
