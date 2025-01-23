@@ -19,9 +19,9 @@
 
 - Consultar productos en lista con filtros adicionales: https://www.compu-finder.com/api/v1/products/products-list/?company=name&category=name&brand=name&offset=0&limit=10
 
-# Codigo para el post y get de los endpoints:
+# Consulta post y get a los endpoints (Python):
 
-## Codigo para hacer post y generar nuevo usuario:
+## Generar nuevo usuario:
 
 ```python
 # data -> json con los datos necesarios para el post
@@ -44,7 +44,7 @@ headers = {
 response = requests.post(url, data=json_data, headers=headers)
 ```
 
-## Codigo para hacer post y generar token:
+## Generar token:
 
 ```python
 # auth_data -> json con los datos necesarios para el post
@@ -66,7 +66,7 @@ headers = {
 response = requests.post(token_url, data=auth_json, headers=headers)
 ```
 
-## Codigo para hacer solicitud get a los endpoints
+## Solicitud get a los endpoints, consultart productos, precio stock
 ```python
 # token -> Token generado con el usurario
 # url -> endpoint a consultar
