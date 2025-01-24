@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, Price
+from .models import Product, Price, Stock
 
 class SerializerProduct(serializers.ModelSerializer):
     code = serializers.CharField(max_length=20)
@@ -20,10 +20,14 @@ class SerializerProduct(serializers.ModelSerializer):
         fields = ('__all__')
 
 class SerializerPrices(serializers.ModelSerializer):
-    price_usd = serializers.FloatField()
-    price_pen = serializers.FloatField()
-    discount = serializers.FloatField()
-
+    # price_usd = serializers.FloatField()
+    # price_pen = serializers.FloatField()
+    # discount = serializers.FloatField(allow_null=True)
     class Meta:
         model = Price
-        fields = ['price_usd', 'price_pen', 'discount', 'datetime_scraper']
+        fields = ['code', 'price_usd', 'price_pen', 'discount', 'datetime_scraper']
+
+class SerializerStocks(serializers.ModelSerializer):
+    class Meta:
+        model = Stock
+        fields = ['code', 'stock', 'datetime_scraper']
