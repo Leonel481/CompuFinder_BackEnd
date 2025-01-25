@@ -16,8 +16,8 @@ services:
       USER_UID: ${USER_UID}
       USER_GID: ${USER_GID}
     entrypoint: ['/usr/local/bin/start-certbot.sh']
-    depends_on:
-      - django_app
+    # depends_on:
+    #   - django_app
     user: "${USER_UID}:${USER_GID}"
 
 volumes:
