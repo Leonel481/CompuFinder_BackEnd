@@ -1,0 +1,26 @@
+# template for variables terraform
+
+gcp_scp_key = "jsonfile"
+gcp_project = "projectid"
+gcp_region = "region"
+zone = "zone"
+
+service_account = "serviceacount"
+
+vm_name = "vmname"
+vm_machine_type = "vmtype"
+
+USER = "user_gcp"
+
+vm_user_global = "new_user_for_vm"
+vm_user_pass_global = "pass_for_new_user"
+
+postgresql_username = "user_postgresql"
+postgresql_password = "pass_postgresql"
+db_dev = "db_developer"
+df_prod = "db_production"
+
+ip_infra_24 = "ip_all_vm_infra/24"
+ip_leo_24 = "ip_local1/24"
+ip_moreno_24 = "ip_local1/24"
+ip_docker = "ip_red_docker32"
