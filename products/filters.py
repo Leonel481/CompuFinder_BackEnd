@@ -1,18 +1,26 @@
-import django_filters
+from django_filters import rest_framework as filters
 from .models import Product, Price
 
-class ProductFilter(django_filters.FilterSet):
-    company = django_filters.CharFilter(field_name='company__name', lookup_expr='exact')
-    category = django_filters.CharFilter(field_name='category__name', lookup_expr='exact')
-    brand = django_filters.CharFilter(field_name='brand__name', lookup_expr='exact')
+class ProductFilter(filters.FilterSet):
+    company = filters.CharFilter(field_name='company__name', lookup_expr='exact')
+    category = filters.CharFilter(field_name='category__name', lookup_expr='exact')
+    brand = filters.CharFilter(field_name='brand__name', lookup_expr='exact')
+    price_usd = filters.RangeFilter(field_name='price_usd')
 
     class Meta:
         model = Product
-        fields = ['company', 'category', 'brand']
+        fields = ['company', 'category', 'brand', 'price_usd']
 
-class ProductNameFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(field_name='name', lookup_expr='icontains')
+class ProductNameFilter(filters.FilterSet):
+    name = filters.CharFilter(field_name='name', lookup_expr='icontains')
 
     class Meta:
         model = Product
         fields = ['name']
+
+# class PriceFilter(filters.FilterSet):
+#     code = filters.CharFilter(field_name='code__iexact', lookup_expr='exact')
+
+#     class Meta:
+#         model = Price
+#         fields = ['code']

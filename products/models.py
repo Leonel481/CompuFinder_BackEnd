@@ -55,7 +55,7 @@ class Stock(models.Model):
     datetime_scraper = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.code} | {self.stock}'
+        return f'{self.code_id} | {self.stock}'
     
     class Meta:
         indexes = [
@@ -71,7 +71,7 @@ class Price(models.Model):
     datetime_scraper = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.code} | {self.price_usd} | {self.price_pen}'
+        return f'{self.code_id} | {self.price_usd} | {self.price_pen}'
     
     class Meta:
         indexes = [

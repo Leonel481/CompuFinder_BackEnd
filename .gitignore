@@ -173,6 +173,7 @@ cython_debug/
 settings/.pg_service.conf
 settings/.my_pgpass
 
+
 # Terraform
 terraform/.terraform/
 terraform/.terraform.lock.hcl
@@ -181,3 +182,5 @@ terraform/terraform.tfstate.*
 terraform/crash.log
 terraform/*.tfvars
 scp-compufinder-4-953607d1c250.json
+
+
