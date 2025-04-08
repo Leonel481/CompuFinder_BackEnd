@@ -57,7 +57,9 @@ resource "google_compute_instance" "vm-001-prod-scp-backend-uscentral" {
   enable_display      = false
 
   labels = {
-    goog-ec-src       = "vm_add-tf"
+    goog-ec-src   = "vm_add-tf"
+    environment   = "prod"
+    app           = "scp-backend"
   }
 
   machine_type = var.vm_machine_type
