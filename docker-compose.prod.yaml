@@ -19,7 +19,7 @@ services:
     # depends_on:
     #   - django_app
     user: "${USER_UID}:${USER_GID}"
-
+    
 volumes:
   certs:
   certbot-www:

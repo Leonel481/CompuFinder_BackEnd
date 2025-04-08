@@ -5,11 +5,11 @@ class ProductFilter(filters.FilterSet):
     company = filters.CharFilter(field_name='company__name', lookup_expr='exact')
     category = filters.CharFilter(field_name='category__name', lookup_expr='exact')
     brand = filters.CharFilter(field_name='brand__name', lookup_expr='exact')
-    # discount_status = filters.BooleanField(field_name='discount_status')
+    price_usd = filters.RangeFilter(field_name='price_usd')
 
     class Meta:
         model = Product
-        fields = ['company', 'category', 'brand']
+        fields = ['company', 'category', 'brand', 'price_usd']
 
 class ProductNameFilter(filters.FilterSet):
     name = filters.CharFilter(field_name='name', lookup_expr='icontains')
