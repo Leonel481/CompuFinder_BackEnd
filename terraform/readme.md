@@ -7,7 +7,7 @@ Posteriormente, crea una **máquina virtual con Ubuntu**, que instala automátic
 ---
 
 ## 📦 Estructura del Proyecto
-. 
+.  
 ├── main.tf # Infraestructura principal  
 ├── provider.tf # Provider nube Utilizado  
 ├── variables.tf # Declaración de variables   
