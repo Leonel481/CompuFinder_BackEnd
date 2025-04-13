@@ -30,5 +30,5 @@ urlpatterns = [
 # /api/v1/products/product-name/?name=texto
 
 # Consulta de precios historicos
-# /api/v1/prices/1234567/ (sin paginacion)
-# /api/v1/prices/?code=code&offset=0&limit=5 (con paginacion)
+# /api/v1/products/prices/1234567/ (sin paginacion)
+# /api/v1/products/prices/?code=code&offset=0&limit=5 (con paginacion)

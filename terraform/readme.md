@@ -34,6 +34,10 @@ docker --version
 docker-compose --version
 ```
 
+## En caso se tenga bae de datos a restaurar
+```bash
+psql -U usuario -d nombre_bd -f ruta_backup
+```
 
 ## Levantar la aplicacion
 La aplicacion esta compuesta de PostgreSQL, Django, Nginx, Certbot
