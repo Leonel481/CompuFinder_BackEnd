@@ -19,6 +19,12 @@
 
 - Consultar productos en lista con filtros adicionales: https://www.compu-finder.com/api/v1/products/products-list/?company=name&category=name&brand=name&offset=0&limit=10
 
+## Endpoint para consultar precios y stock:
+
+- Consultar historico de precios: https://www.compu-finder.com/api/v1/products/prices/?code=1234567/
+
+- Consultar historico de stock: https://www.compu-finder.com/api/v1/products/stock/?code=1234567/
+
 # Consulta post y get a los endpoints (Python):
 
 ## Generar nuevo usuario:

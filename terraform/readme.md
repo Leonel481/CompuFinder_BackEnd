@@ -33,3 +33,28 @@ sudo systemctl status postgresql # Verificar la isntalacion de postgresql y ver 
 docker --version
 docker-compose --version
 ```
+
+## En caso se tenga bae de datos a restaurar
+```bash
+psql -U usuario -d nombre_bd -f ruta_backup
+```
+
+## Levantar la aplicacion
+La aplicacion esta compuesta de PostgreSQL, Django, Nginx, Certbot
+
+- Primero configurar el DNS en el servicio que se usa para el Dominio
+
+- Segundo Ejceutar los comandos:
+```bash
+docker compose -f docker-compose.yaml -f docker-compose.prod.yaml build --no-cache
+docker compose -f docker-compose.yaml up -d
+docker compose -f docker-compose.prod.yaml up -d cerbot
+```
+
+- Tercero, luego de obtener los SSL correctamente con lestencrypt, modificar el archivo nginx.conf descomentando la parte comentado y comentando la parte no comentada (proximo a automatizar)
+
+- Finalmente ejecutar
+```bash
+docker exec -it <nombre_de__imagen> nginx -s reload
+```
+

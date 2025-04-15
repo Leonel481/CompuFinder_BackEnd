@@ -1,6 +1,34 @@
 # Este código es compatible con Terraform 4.25.0 y versiones compatibles con 4.25.0.
 # Para obtener información sobre la validación de este código de Terraform, consulta https://developer.hashicorp.com/terraform/tutorials/gcp-get-started/google-cloud-platform-build#format-and-validate-the-configuration
 
+# Firewall HTTP
+resource "google_compute_firewall" "allow_http" {
+  name    = "allow-http"
+  network = var.network  # Usa la variable para la red
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80"]
+  }
+
+  target_tags   = ["http-server"]
+  source_ranges = ["0.0.0.0/0"]
+}
+
+# Firewall HTTPS
+resource "google_compute_firewall" "allow_https" {
+  name    = "allow-https"
+  network = var.network  # Usa la variable para la red
+
+  allow {
+    protocol = "tcp"
+    ports    = ["443"]
+  }
+
+  target_tags   = ["https-server"]
+  source_ranges = ["0.0.0.0/0"]
+}
+
 # Firewall Rule DataaBase BackEnd
 resource "google_compute_firewall" "allow_postgresql" {
   name    = "allow-postgresql"
@@ -12,7 +40,10 @@ resource "google_compute_firewall" "allow_postgresql" {
   }
 
   # Permitir acceso desde otras VM en la misma red
-  source_ranges = ["10.128.0.0/20"]
+  source_ranges = ["10.128.0.0/20",
+                    var.ip_leo_24, 
+                    var.ip_moreno_24, 
+                    var.ip_docker]
   target_tags   = ["postgresql-server"]  
 }
 
