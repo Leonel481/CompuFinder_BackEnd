@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, Price, Stock
+from .models import Product, Price, Stock, Company, Brand, Category
 
 class SerializerProduct(serializers.ModelSerializer):
     code = serializers.CharField(max_length=20)
@@ -31,3 +31,18 @@ class SerializerStocks(serializers.ModelSerializer):
     class Meta:
         model = Stock
         fields = ['code', 'stock', 'datetime_scraper']
+
+class SerializerCompany(serializers.ModelSerializer):
+    class Meta:
+        model = Company
+        fields = ['id', 'name']
+
+class SerializerBrand(serializers.ModelSerializer):
+    class Meta:
+        model = Brand
+        fields = ['id', 'name']
+
+class SerializerCategory(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name']
