@@ -90,25 +90,26 @@ class StockListView(ListAPIView):
     Api para consulta de los precios historicos de un producto unico (precio, dscuento)
     """
     # authentication_classes = [TokenAuthentication]
+    authentication_classes = [CookieJWTAuthentication] # Consumir el token de la cookie
     permission_classes = [IsAuthenticated]
     queryset = Stock.objects.all()
     serializer_class = SerializerStocks
     pagination_class = LimitOffsetPagination
-    filter_backends = [DjangoFilterBackend]
-    lookup_field = 'code_id'
+    # filter_backends = [DjangoFilterBackend]
+    # lookup_field = 'code_id'
 
-    # def get_queryset(self):
-    #     code = self.request.query_params.get('code', None)
-    #     if not code:
-    #         raise NotFound(detail="The 'code' parameter is required.")
+    def get_queryset(self):
+        code = self.request.query_params.get('code', None)
+        if not code:
+            raise NotFound(detail="The 'code' parameter is required.")
         
-    #     # Filtra por la clave foránea code_id de la tabla Price
-    #     queryset = Price.objects.filter(code_id=code)
+        # Filtra por la clave foránea code_id de la tabla Price
+        queryset = Price.objects.filter(code_id=code).order_by("datetime_scraper")
         
-    #     if not queryset.exists():
-    #         raise NotFound(detail="No prices found for the provided 'code'.")
+        if not queryset.exists():
+            raise NotFound(detail="No prices found for the provided 'code'.")
         
-    #     return queryset
+        return queryset
 
 class ProductDetailView(RetrieveAPIView):
     """
